@@ -1,0 +1,16 @@
+{
+  "extends": "next/core-web-api",
+  "rules": {
+    "react/no-unescaped-entities": "off",
+    "react/display-name": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": [
+      "warn",
+      {
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_"
+      }
+    ],
+    "import/no-anonymous-default-export": "off"
+  }
+}
