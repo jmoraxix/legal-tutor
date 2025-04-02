@@ -72,6 +72,9 @@ export function AuthProvider({ children }) {
         setUser(null);
         setProfile(null);
       }
+
+      // Actualizar el estado de carga
+      setLoading(false);
     });
     
     // Limpiar listener al desmontar

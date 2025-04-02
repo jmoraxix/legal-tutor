@@ -4,8 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import UserButton from "@/components/auth/UserButton";
+import PageLayout from "@/components/layout/PageLayout";
 
 // Ejemplo de preguntas para el quiz
 const sampleQuestions = [
@@ -107,32 +106,23 @@ export default function QuizPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-950">
-      <header className="border-b bg-white dark:bg-slate-900 shadow-sm">
-        <div className="container mx-auto py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-serif font-bold">
-            Legal Tutor
-          </Link>
-          <nav className="flex items-center gap-6">
-            <ul className="flex gap-6">
-              <li>
-                <Link href="/" className="text-legal-600 hover:text-legal-900 dark:text-legal-300 dark:hover:text-white font-medium">
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link href="/chat" className="text-legal-600 hover:text-legal-900 dark:text-legal-300 dark:hover:text-white font-medium">
-                  Chat
-                </Link>
-              </li>
-            </ul>
-            <UserButton />
-            <ThemeToggle />
-          </nav>
-        </div>
-      </header>
+    <PageLayout>
 
-      <main className="flex-1 container mx-auto py-8 px-4">
+      <main className="flex-1 container mx-auto py-8 px-4 relative">
+        {/* Coming Soon Overlay */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center bg-white/90 dark:bg-slate-900/90 z-10 rounded-lg backdrop-blur-sm">
+          <h2 className="text-3xl font-serif font-bold mb-4 text-legal-800 dark:text-legal-200">¡Próximamente!</h2>
+          <p className="text-xl mb-6 text-legal-600 dark:text-legal-300 text-center max-w-md">
+            Estamos trabajando para traerte los mejores quizzes legales. Regresa pronto para poner a prueba tus conocimientos.
+          </p>
+          <Link href="/">
+            <Button 
+              className="bg-legal-600 hover:bg-legal-500 dark:bg-legal-400 dark:hover:bg-legal-300 dark:text-slate-900"
+            >
+              Volver al inicio
+            </Button>
+          </Link>
+        </div>
         <Card className="w-full max-w-4xl mx-auto shadow-legal">
           <CardHeader className="border-b bg-white dark:bg-slate-900">
             <CardTitle className="font-serif text-legal-800 dark:text-legal-200">Quiz Legal</CardTitle>
@@ -146,7 +136,7 @@ export default function QuizPage() {
                 </p>
                 <Button 
                   onClick={handleRestartQuiz}
-                  className="bg-legal-800 hover:bg-legal-700 dark:bg-legal-700 dark:hover:bg-legal-600"
+                  className="bg-legal-600 hover:bg-legal-500 dark:bg-legal-400 dark:hover:bg-legal-300 dark:text-slate-900"
                 >
                   Reiniciar Quiz
                 </Button>
@@ -208,14 +198,14 @@ export default function QuizPage() {
                   <Button 
                     onClick={handleCheckAnswer} 
                     disabled={selectedOption === null}
-                    className="bg-legal-800 hover:bg-legal-700 dark:bg-legal-700 dark:hover:bg-legal-600"
+                    className="bg-legal-600 hover:bg-legal-500 dark:bg-legal-400 dark:hover:bg-legal-300 dark:text-slate-900"
                   >
                     Verificar Respuesta
                   </Button>
                 ) : (
                   <Button 
                     onClick={handleNextQuestion}
-                    className="bg-legal-800 hover:bg-legal-700 dark:bg-legal-700 dark:hover:bg-legal-600"
+                    className="bg-legal-600 hover:bg-legal-500 dark:bg-legal-400 dark:hover:bg-legal-300 dark:text-slate-900"
                   >
                     {currentQuestion < sampleQuestions.length - 1 ? "Siguiente Pregunta" : "Ver Resultados"}
                   </Button>
@@ -231,16 +221,6 @@ export default function QuizPage() {
         </Card>
       </main>
 
-      <footer className="border-t py-4 bg-white dark:bg-slate-900 shadow-md">
-        <div className="container mx-auto text-center text-sm text-legal-500">
-          <p>&copy; {new Date().getFullYear()} Ayzek Studio. Todos los derechos reservados.</p>
-          <div className="flex justify-center gap-6 mt-2">
-            <Link href="/terminos" className="text-legal-500 hover:text-legal-700 dark:hover:text-legal-300">Términos</Link>
-            <Link href="/privacidad" className="text-legal-500 hover:text-legal-700 dark:hover:text-legal-300">Privacidad</Link>
-            <Link href="/contacto" className="text-legal-500 hover:text-legal-700 dark:hover:text-legal-300">Contacto</Link>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </PageLayout>
   );
 }

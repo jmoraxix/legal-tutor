@@ -1,8 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import UserButton from "@/components/auth/UserButton";
+import PageLayout from "@/components/layout/PageLayout";
 
 /**
  * Home page component.
@@ -11,16 +10,7 @@ import UserButton from "@/components/auth/UserButton";
  */
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-slate-50 dark:bg-slate-950">
-      <header className="border-b bg-white dark:bg-slate-900 shadow-sm">
-        <div className="container mx-auto py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-serif font-bold">Legal Tutor</h1>
-          <div className="flex items-center gap-6">
-            <UserButton />
-            <ThemeToggle />
-          </div>
-        </div>
-      </header>
+    <PageLayout>
       
       <main className="flex-1">
         <section className="py-20 text-center bg-gradient-to-b from-white to-slate-100 dark:from-slate-900 dark:to-slate-800">
@@ -73,24 +63,6 @@ export default function Home() {
         </section>
       </main>
       
-      <footer className="bg-legal-800 text-legal-200 py-8">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <div className="mb-4 md:mb-0">
-              <h3 className="font-serif font-bold text-white text-lg mb-2">Legal Tutor</h3>
-              <p className="text-legal-300">&copy; {new Date().getFullYear()} Ayzek Studio. Todos los derechos reservados.</p>
-            </div>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-x-12 gap-y-2 text-legal-300">
-              <Link href="/terminos" className="hover:text-white transition-colors">Términos de Uso</Link>
-              <Link href="/privacidad" className="hover:text-white transition-colors">Política de Privacidad</Link>
-              <Link href="/contacto" className="hover:text-white transition-colors">Contacto</Link>
-              <Link href="/sobre-nosotros" className="hover:text-white transition-colors">Sobre Nosotros</Link>
-              <Link href="/ayuda" className="hover:text-white transition-colors">Ayuda</Link>
-              <Link href="/faq" className="hover:text-white transition-colors">Preguntas Frecuentes</Link>
-            </div>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </PageLayout>
   );
 }

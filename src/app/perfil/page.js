@@ -8,8 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
-import UserButton from "@/components/auth/UserButton";
+import PageLayout from "@/components/layout/PageLayout";
 
 /**
  * Página de perfil de usuario
@@ -18,6 +17,9 @@ import UserButton from "@/components/auth/UserButton";
  */
 export default function PerfilPage() {
   const { user, profile, updateProfile, loading, isAuthenticated } = useAuth();
+  
+  // Log authentication state for debugging
+  console.log('Profile page loaded, auth state:', { loading, isAuthenticated, hasUser: !!user });
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [updateMessage, setUpdateMessage] = useState("");
@@ -26,8 +28,16 @@ export default function PerfilPage() {
 
   // Redirigir si no está autenticado
   useEffect(() => {
-    if (!loading && !isAuthenticated) {
-      router.push("/login");
+    // First check ensures the auth state has been loaded
+    if (!loading) {
+      // Then check if the user is actually authenticated
+      if (!isAuthenticated) {
+        
+        console.log('No user authenticated, redirecting to login');
+        router.push('/login');
+      } else {
+        console.log('User authenticated, profile accessible');
+      }
     }
   }, [loading, isAuthenticated, router]);
 
@@ -80,35 +90,7 @@ export default function PerfilPage() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col bg-slate-50 dark:bg-slate-950">
-      <header className="border-b bg-white dark:bg-slate-900 shadow-sm">
-        <div className="container mx-auto py-4 flex justify-between items-center">
-          <Link href="/" className="text-2xl font-serif font-bold">
-            Legal Tutor
-          </Link>
-          <nav className="flex items-center gap-6">
-            <ul className="flex gap-6">
-              <li>
-                <Link href="/" className="text-legal-600 hover:text-legal-900 dark:text-legal-300 dark:hover:text-white font-medium">
-                  Inicio
-                </Link>
-              </li>
-              <li>
-                <Link href="/chat" className="text-legal-600 hover:text-legal-900 dark:text-legal-300 dark:hover:text-white font-medium">
-                  Chat
-                </Link>
-              </li>
-              <li>
-                <Link href="/quiz" className="text-legal-600 hover:text-legal-900 dark:text-legal-300 dark:hover:text-white font-medium">
-                  Quiz
-                </Link>
-              </li>
-            </ul>
-            <UserButton />
-            <ThemeToggle />
-          </nav>
-        </div>
-      </header>
+    <PageLayout>
 
       <main className="flex-1 container mx-auto py-8 px-4">
         <Card className="w-full max-w-2xl mx-auto shadow-legal">
@@ -159,7 +141,7 @@ export default function PerfilPage() {
               
               <Button 
                 type="submit" 
-                className="bg-legal-800 hover:bg-legal-700 dark:bg-legal-700 dark:hover:bg-legal-600"
+                className="bg-legal-600 hover:bg-legal-500 dark:bg-legal-400 dark:hover:bg-legal-300 dark:text-slate-900"
                 disabled={isUpdating}
               >
                 {isUpdating ? "Actualizando..." : "Actualizar Perfil"}
@@ -169,16 +151,6 @@ export default function PerfilPage() {
         </Card>
       </main>
 
-      <footer className="border-t py-4 bg-white dark:bg-slate-900 shadow-md">
-        <div className="container mx-auto text-center text-sm text-legal-500">
-          <p>&copy; {new Date().getFullYear()} Ayzek Studio. Todos los derechos reservados.</p>
-          <div className="flex justify-center gap-6 mt-2">
-            <Link href="/terminos" className="text-legal-500 hover:text-legal-700 dark:hover:text-legal-300">Términos</Link>
-            <Link href="/privacidad" className="text-legal-500 hover:text-legal-700 dark:hover:text-legal-300">Privacidad</Link>
-            <Link href="/contacto" className="text-legal-500 hover:text-legal-700 dark:hover:text-legal-300">Contacto</Link>
-          </div>
-        </div>
-      </footer>
-    </div>
+    </PageLayout>
   );
 }

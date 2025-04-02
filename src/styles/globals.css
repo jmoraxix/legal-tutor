@@ -13,7 +13,7 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
  
-    --primary: 215 25% 25%; /* Azul grisáceo oscuro */
+    --primary: 215 25% 40%; /* Azul grisáceo medio - más claro que el anterior */
     --primary-foreground: 210 40% 98%;
  
     --secondary: 210 40% 96.1%;
@@ -45,7 +45,7 @@
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
  
-    --primary: 210 20% 65%; /* Azul grisáceo más claro para tema oscuro */
+    --primary: 210 20% 85%; /* Azul grisáceo muy claro para tema oscuro - reducido a la mitad de oscuridad */
     --primary-foreground: 222.2 47.4% 11.2%;
  
     --secondary: 217.2 32.6% 17.5%;
@@ -98,6 +98,6 @@
   }
   
   .legal-button {
-    @apply bg-slate-800 hover:bg-slate-700 text-white dark:bg-slate-700 dark:hover:bg-slate-600 rounded-md px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2;
+    @apply bg-slate-600 hover:bg-slate-500 text-white dark:bg-slate-400 dark:hover:bg-slate-300 dark:text-slate-900 rounded-md px-4 py-2 text-sm font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-500 focus-visible:ring-offset-2;
   }
 }

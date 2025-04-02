@@ -2,9 +2,39 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { formatDistanceToNow } from "date-fns";
-import { es } from "date-fns/locale";
+// Temporarily remove date-fns import
+// import { formatDistanceToNow } from "date-fns";
+// import { es } from "date-fns/locale";
 import { deleteConversation, updateConversationTitle } from "@/lib/supabase/conversations";
+
+/**
+ * Formatea una fecha en formato relativo simple
+ * Función temporal hasta que se pueda usar date-fns correctamente
+ * 
+ * @param {Date} date - Fecha a formatear
+ * @returns {string} - Texto formateado
+ */
+function formatDateRelative(date) {
+  if (!date) return "";
+  
+  const now = new Date();
+  const diff = now.getTime() - date.getTime();
+  
+  // Convertir milisegundos a minutos, horas, días
+  const minutes = Math.floor(diff / 60000);
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+  
+  if (days > 0) {
+    return `hace ${days} ${days === 1 ? 'día' : 'días'}`;
+  } else if (hours > 0) {
+    return `hace ${hours} ${hours === 1 ? 'hora' : 'horas'}`;
+  } else if (minutes > 0) {
+    return `hace ${minutes} ${minutes === 1 ? 'minuto' : 'minutos'}`;
+  } else {
+    return "justo ahora";
+  }
+}
 
 /**
  * Componente para mostrar un ítem de conversación en la lista de historial
@@ -20,8 +50,9 @@ export default function ConversationItem({ conversation, onDelete }) {
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState("");
   
+  // Usar la función temporal en lugar de date-fns
   const formattedDate = conversation.updated_at
-    ? formatDistanceToNow(new Date(conversation.updated_at), { addSuffix: true, locale: es })
+    ? formatDateRelative(new Date(conversation.updated_at))
     : "";
   
   const handleEdit = () => {

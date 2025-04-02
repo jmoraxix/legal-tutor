@@ -10,7 +10,7 @@ const supabase = createSupabaseClient();
  */
 export async function getUserConversations(userId) {
   const { data, error } = await supabase
-    .from('conversations')
+    .from('chat_sessions')
     .select('*')
     .eq('user_id', userId)
     .order('updated_at', { ascending: false });
@@ -27,7 +27,7 @@ export async function getUserConversations(userId) {
 export async function getConversationWithMessages(conversationId) {
   // Obtener la conversación
   const { data: conversation, error: conversationError } = await supabase
-    .from('conversations')
+    .from('chat_sessions')
     .select('*')
     .eq('id', conversationId)
     .single();
@@ -38,9 +38,9 @@ export async function getConversationWithMessages(conversationId) {
   
   // Obtener los mensajes de la conversación
   const { data: messages, error: messagesError } = await supabase
-    .from('messages')
+    .from('chat_messages')
     .select('*')
-    .eq('conversation_id', conversationId)
+    .eq('chat_session_id', conversationId)
     .order('created_at', { ascending: true });
   
   return { 
@@ -59,7 +59,7 @@ export async function getConversationWithMessages(conversationId) {
  */
 export async function createConversation(userId, title) {
   const { data, error } = await supabase
-    .from('conversations')
+    .from('chat_sessions')
     .insert([{ user_id: userId, title }])
     .select()
     .single();
@@ -76,7 +76,7 @@ export async function createConversation(userId, title) {
  */
 export async function updateConversationTitle(conversationId, title) {
   const { data, error } = await supabase
-    .from('conversations')
+    .from('chat_sessions')
     .update({ title, updated_at: new Date() })
     .eq('id', conversationId)
     .select()
@@ -93,7 +93,7 @@ export async function updateConversationTitle(conversationId, title) {
  */
 export async function deleteConversation(conversationId) {
   const { error } = await supabase
-    .from('conversations')
+    .from('chat_sessions')
     .delete()
     .eq('id', conversationId);
   
@@ -111,8 +111,8 @@ export async function deleteConversation(conversationId) {
 export async function addMessageToConversation(conversationId, role, content) {
   // Añadir el mensaje
   const { data: message, error: messageError } = await supabase
-    .from('messages')
-    .insert([{ conversation_id: conversationId, role, content }])
+    .from('chat_messages')
+    .insert([{ chat_session_id: conversationId, role, content }])
     .select()
     .single();
   
@@ -122,7 +122,7 @@ export async function addMessageToConversation(conversationId, role, content) {
   
   // Actualizar la fecha de la conversación
   await supabase
-    .from('conversations')
+    .from('chat_sessions')
     .update({ updated_at: new Date() })
     .eq('id', conversationId);
   

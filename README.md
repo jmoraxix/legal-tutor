@@ -12,6 +12,9 @@ La aplicación ofrece dos modalidades principales:
 - Respuestas basadas en documentos legales costarricenses
 - Modalidad quiz para estudiantes y personas interesadas en aprender
 - Almacenamiento de historial de conversaciones
+- Sistema completo de autenticación (registro, inicio y cierre de sesión)
+- Perfiles de usuario personalizables
+- Tema claro/oscuro con cambio automático
 - Diseño responsive para uso en diferentes dispositivos
 
 ## 🛠️ Tecnologías Utilizadas

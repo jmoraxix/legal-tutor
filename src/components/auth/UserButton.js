@@ -18,7 +18,8 @@ export default function UserButton() {
 
   const handleLogout = async () => {
     await logout();
-    router.push("/");
+    // Force a complete refresh of the page to ensure state is reset
+    window.location.href = "/";
   };
 
   // Si no está autenticado, mostrar botones de login/registro
@@ -58,18 +59,24 @@ export default function UserButton() {
       {isMenuOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-legal-800 rounded-md shadow-lg py-1 z-10 border border-legal-200 dark:border-legal-700">
           <Link 
-            href="/perfil" 
+            href="/profile" 
             className="block px-4 py-2 text-sm text-legal-700 hover:bg-legal-100 dark:text-legal-300 dark:hover:bg-legal-700"
-            onClick={() => setIsMenuOpen(false)}
+            onClick={() => {
+              setIsMenuOpen(false); 
+              // Ensure we only navigate to profile if authenticated
+              if (!isAuthenticated) {
+                router.push('/login');
+              }
+            }}
           >
             Mi Perfil
           </Link>
           <Link 
-            href="/historial" 
+            href="/history" 
             className="block px-4 py-2 text-sm text-legal-700 hover:bg-legal-100 dark:text-legal-300 dark:hover:bg-legal-700"
             onClick={() => setIsMenuOpen(false)}
           >
-            Historial de Consultas
+            Mis Conversaciones
           </Link>
           <button 
             onClick={() => {
