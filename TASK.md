@@ -19,7 +19,7 @@
 ### Chat General
 - [x] Diseñar interfaz de chat (01/04/2025)
 - [x] Implementar envío de mensajes (básico) (01/04/2025)
-- [ ] Configurar conexión con n8n (webhook)
+- [x] Configurar conexión con n8n (webhook) (03/04/2025)
 - [x] Implementar visualización de respuestas (básico) (01/04/2025)
 - [x] Guardar historial de conversaciones en Supabase (01/04/2025)
 - [x] Implementar barra lateral con historial de chats (02/04/2025)
@@ -33,7 +33,7 @@
 - [ ] Guardar progreso de usuario en Supabase
 
 ### n8n
-- [ ] Configurar workflow para procesamiento de mensajes
+- [x] Configurar workflow para procesamiento de mensajes (03/04/2025)
 - [ ] Implementar integración con IA (Claude o similar)
 - [ ] Configurar acceso a documentos legales
 - [ ] Implementar lógica de respuestas para el chat general
@@ -48,6 +48,8 @@
 
 ### Pruebas
 - [x] Implementar pruebas unitarias para componentes de autenticación (02/04/2025) 
+- [x] Implementar pruebas unitarias para chat service (03/04/2025)
+- [x] Implementar pruebas unitarias para componente ChatMessage (03/04/2025)
 - [ ] Implementar pruebas unitarias para otros componentes
 - [ ] Implementar pruebas de integración
 - [ ] Realizar pruebas de usabilidad
@@ -66,6 +68,8 @@
 - [x] Crear TASK.md (01/04/2025)
 
 ## 🔎 Tareas Descubiertas Durante el Trabajo
+- [x] Modificar la interfaz de chat para mostrar el mensaje de bienvenida como un tooltip y no guardar los mensajes del sistema ni del AI en la base de datos (04/04/2025)
+- [x] Mostrar el tooltip de bienvenida solo en nuevas conversaciones y mostrar errores del sistema en el chat sin guardarlos en la base de datos (04/04/2025)
 - [x] Estandarizar las rutas a inglés (/historial -> /history, /perfil -> /profile) (02/04/2025)
 - [x] Cambiar la redirección por defecto de /historial a /chat (02/04/2025)
 - [x] Reordenar navegación: poner "Chat" primero y después "Mis Conversaciones" (02/04/2025)
@@ -90,6 +94,15 @@
 - [x] Implementar componente ChatSidebar para mostrar conversaciones existentes (02/04/2025)
 - [x] Crear ruta dinámica para visualizar y continuar conversaciones existentes (02/04/2025)
 - [x] Renombrar tablas de conversations a chat_sessions y messages a chat_messages (02/04/2025)
+- [x] Actualizar field de chat_messages de conversation_id a session_id (03/04/2025)
+- [x] Actualizar campos de role a sender_type con valores 'user' y 'AI' (03/04/2025)
+- [x] Implementar integración con webhook de N8N para procesamiento de mensajes (03/04/2025)
+- [x] Agregar tipo de mensaje "system" para mostrar mensajes de sistema centrados con estilo destacado (03/04/2025)
+- [x] Crear componente reutilizable ChatMessage para estandarizar visualización de mensajes (03/04/2025)
+- [x] Corregir loop infinito en consultas de chat_sessions y profiles cuando se crea una nueva conversación (03/04/2025)
+- [x] Agregar diálogo de confirmación al eliminar conversaciones (03/04/2025)
+- [x] Agregar soporte para formato Markdown en los mensajes del bot (03/04/2025)
+- [x] Corregir visualización del historial de chat en la barra lateral (03/04/2025)
 - [ ] Instalar y configurar librería date-fns para formateo de fechas (pendiente)
 - [ ] Implementar servicios de traducción para i18n
 - [ ] Mejorar la navegación y diseño para móviles

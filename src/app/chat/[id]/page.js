@@ -4,10 +4,12 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth";
 import { getConversationWithMessages, addMessageToConversation } from "@/lib/supabase/conversations";
+import { sendMessageToN8N } from "@/lib/chat/chat-service";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import ChatLayout from "@/components/layout/ChatLayout";
+import { ChatMessage } from "@/components/chat/messages";
 
 /**
  * Page component for displaying and continuing a specific conversation.
@@ -50,7 +52,7 @@ export default function ConversationPage({ params }) {
         
         // Verificar que la conversación pertenece al usuario actual
         if (conversation.user_id !== user?.id) {
-          router.push('/historial');
+          router.push('/history');
           return;
         }
         
@@ -83,42 +85,49 @@ export default function ConversationPage({ params }) {
       setIsSending(true);
       setError("");
       
-      const userMessage = { role: "user", content: input };
+      const userMessage = { sender_type: "user", content: input };
       
-      // Guardar el mensaje del usuario
+      // Add user message to UI
+      setMessages((prev) => [...prev, userMessage]);
+      
+      // Save user message to database
       await addMessageToConversation(
         conversation.id,
         "user",
         input
       );
       
-      // Add user message to chat (UI)
-      setMessages((prev) => [...prev, userMessage]);
+      // Clear input field
       setInput("");
       
-      // Simulamos respuesta del asistente
-      setTimeout(async () => {
-        const assistantContent = "Esta es una respuesta de ejemplo para el mensaje enviado en una conversación existente. En la implementación real, esta respuesta vendría de n8n después de procesar tu consulta con IA y documentos legales de Costa Rica.";
-        
-        const botMessage = {
-          role: "assistant",
-          content: assistantContent
-        };
-        
-        // Guardar la respuesta del asistente
-        await addMessageToConversation(
-          conversation.id,
-          "assistant",
-          assistantContent
-        );
-        
-        setMessages((prev) => [...prev, botMessage]);
-        setIsSending(false);
-      }, 1000);
+      // Send message to N8N webhook
+      const response = await sendMessageToN8N(input, conversation.id);
+      
+      // Create AI response message
+      const botMessage = {
+        sender_type: "AI",
+        content: response.message
+      };
+      
+      // No longer saving AI responses
+      
+      // Add AI response to UI
+      setMessages((prev) => [...prev, botMessage]);
       
     } catch (err) {
       console.error("Error al enviar mensaje:", err);
-      setError("Ocurrió un error al procesar tu mensaje. Intenta de nuevo.");
+      setError("");
+      
+      // Add system error message to UI without saving to DB
+      const systemErrorMessage = {
+        sender_type: "system",
+        content: "Ocurrió un error al procesar tu mensaje. Por favor, intenta de nuevo."
+      };
+      
+      // Add system message to UI
+      setMessages((prev) => [...prev, systemErrorMessage]);
+      
+    } finally {
       setIsSending(false);
     }
   };
@@ -151,24 +160,7 @@ export default function ConversationPage({ params }) {
               ) : (
                 <>
                   {messages.map((message, index) => (
-                    <div 
-                      key={index} 
-                      className={`flex ${
-                        message.role === "user" ? "justify-end" : "justify-start"
-                      }`}
-                    >
-                      <div
-                        className={`max-w-[80%] rounded-lg px-4 py-2 shadow-sm ${
-                          message.role === "user"
-                            ? "bg-legal-800 text-white dark:bg-legal-700"
-                            : message.role === "system"
-                            ? "bg-legal-100 dark:bg-legal-800 border border-legal-200 dark:border-legal-700 text-legal-800 dark:text-legal-200"
-                            : "bg-legal-100 dark:bg-legal-800 border border-legal-200 dark:border-legal-700 text-legal-800 dark:text-legal-200"
-                        }`}
-                      >
-                        {message.content}
-                      </div>
-                    </div>
+                    <ChatMessage key={index} message={message} />
                   ))}
                   {isSending && (
                     <div className="flex justify-start">
@@ -193,18 +185,20 @@ export default function ConversationPage({ params }) {
             )}
             <form onSubmit={handleSubmit} className="w-full">
               <div className="flex gap-2">
-                <Input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  placeholder="Escribe tu consulta legal aquí..."
-                  disabled={isLoading || isSending}
-                  className="flex-1"
-                />
+                <div className="flex-1 relative group">  
+                  <Input
+                    type="text"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    placeholder="Escribe tu consulta legal aquí..."
+                    disabled={isLoading || isSending}
+                    className="w-full"
+                  />
+                </div>
                 <Button 
                   type="submit" 
                   disabled={isLoading || isSending}
-                  className="bg-legal-800 hover:bg-legal-700 dark:bg-legal-700 dark:hover:bg-legal-600"
+                  className="bg-legal-600 hover:bg-legal-500 dark:bg-legal-400 dark:hover:bg-legal-300 dark:text-slate-900"
                 >
                   Enviar
                 </Button>

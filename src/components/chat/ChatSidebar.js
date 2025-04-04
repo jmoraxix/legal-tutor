@@ -20,7 +20,7 @@ export default function ChatSidebar() {
   const pathname = usePathname();
   
   useEffect(() => {
-    async function loadConversations() {
+    const loadConversations = async () => {
       if (!user) return;
       
       try {
@@ -29,17 +29,44 @@ export default function ChatSidebar() {
         
         if (error) throw error;
         
-        setConversations(conversations);
+        // Sort conversations by updatedAt date (newest first)
+        const sortedConversations = conversations.sort((a, b) => {
+          return new Date(b.updated_at) - new Date(a.updated_at);
+        });
+        
+        setConversations(sortedConversations);
       } catch (err) {
         console.error('Error loading conversations:', err);
         setError('No se pudieron cargar las conversaciones.');
       } finally {
         setIsLoading(false);
       }
-    }
+    };
     
     loadConversations();
-  }, [user]);
+    
+    // Setup a subscription to refresh the conversation list when it changes
+    if (user) {
+      const { createSupabaseClient } = require('@/lib/supabase/client');
+      const supabase = createSupabaseClient();
+      
+      const conversationsSubscription = supabase
+        .channel('chat_sessions_changes')
+        .on('postgres_changes', {
+          event: '*',
+          schema: 'public',
+          table: 'chat_sessions',
+          filter: `user_id=eq.${user.id}`,
+        }, () => {
+          loadConversations();
+        })
+        .subscribe();
+        
+      return () => {
+        supabase.removeChannel(conversationsSubscription);
+      };
+    }
+  }, [user, pathname]);
   
   // Helper to determine if conversation is active
   const isActive = (id) => pathname === `/chat/${id}`;
@@ -88,9 +115,9 @@ export default function ChatSidebar() {
                       ? 'bg-legal-100 text-legal-900 dark:bg-legal-800 dark:text-white font-medium'
                       : 'text-legal-700 hover:bg-legal-50 dark:text-legal-300 dark:hover:bg-legal-800/50'
                   }`}
-                  title={conversation.title}
+                  title={conversation.title || "Loading title..."}
                 >
-                  {conversation.title}
+                  {conversation.title || "Loading title..."}
                 </Link>
               </li>
             ))}
