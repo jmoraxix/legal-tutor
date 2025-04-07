@@ -16,18 +16,21 @@ La aplicación ofrece dos modalidades principales:
 - Perfiles de usuario personalizables
 - Tema claro/oscuro con cambio automático
 - Diseño responsive para uso en diferentes dispositivos
+- Desplegado en Netlify para alta disponibilidad
 
 ## 🛠️ Tecnologías Utilizadas
 - **Frontend**: React
 - **Backend**: Supabase (autenticación, base de datos)
 - **Automatizaciones**: n8n (para procesamiento de IA y webhooks)
 - **UI Components**: ShadCN
+- **Hosting/CI/CD**: Netlify
 
 ## ⚙️ Requisitos Previos
 - Node.js (v18 o superior)
 - npm o yarn
 - Cuenta en Supabase
 - Instancia de n8n configurada para webhooks
+- Cuenta en Netlify (para despliegue)
 
 ## 🔧 Instalación y Configuración
 
@@ -57,6 +60,34 @@ NEXT_PUBLIC_N8N_WEBHOOK_URL=tu_url_de_webhook_n8n
 npm run dev
 # o
 yarn dev
+```
+
+### Despliegue en Netlify
+
+#### Opción 1: Despliegue con Interfaz Gráfica
+1. Registrarse o iniciar sesión en [Netlify](https://www.netlify.com/)
+2. Haz clic en "New site from Git"
+3. Conecta tu repositorio (GitHub, GitLab, Bitbucket)
+4. Selecciona el repositorio `legal-tutor`
+5. Configura los ajustes de build:
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+6. Configura las variables de entorno en la sección "Advanced build settings"
+7. Haz clic en "Deploy site"
+
+#### Opción 2: Despliegue con Netlify CLI
+```bash
+# Instala Netlify CLI globalmente
+npm install -g netlify-cli
+
+# Inicia sesión en Netlify
+netlify login
+
+# Inicializa el proyecto con Netlify
+netlify init
+
+# Despliega el sitio en producción
+netlify deploy --prod
 ```
 
 ## 🗂️ Estructura del Proyecto

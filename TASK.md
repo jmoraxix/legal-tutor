@@ -55,7 +55,7 @@
 
 ### Despliegue
 - [ ] Configurar entorno de producción
-- [ ] Implementar CI/CD
+- [x] Implementar configuración para despliegue en Netlify (07/04/2025)
 - [ ] Realizar despliegue inicial
 - [ ] Configurar dominio y SSL
 
@@ -90,6 +90,6 @@
 - [x] Implementar componente ChatSidebar para mostrar conversaciones existentes (02/04/2025)
 - [x] Crear ruta dinámica para visualizar y continuar conversaciones existentes (02/04/2025)
 - [x] Renombrar tablas de conversations a chat_sessions y messages a chat_messages (02/04/2025)
-- [ ] Instalar y configurar librería date-fns para formateo de fechas (pendiente)
+- [x] Configurar Netlify para despliegue automatizado (07/04/2025)
 - [ ] Implementar servicios de traducción para i18n
 - [ ] Mejorar la navegación y diseño para móviles
