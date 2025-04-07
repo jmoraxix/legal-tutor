@@ -5,12 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "export": "next export",
+    "build-static": "next build && next export",
     "start": "next start",
     "lint": "next lint",
     "netlify-build": "next build",
     "netlify-dev": "netlify dev"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^4.41.3",
     "@radix-ui/react-avatar": "^1.0.4",
     "@radix-ui/react-dropdown-menu": "^2.0.6",
     "@radix-ui/react-label": "^2.0.2",
