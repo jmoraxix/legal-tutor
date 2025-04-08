@@ -48,7 +48,7 @@
 
 ### Pruebas
 - [x] Implementar pruebas unitarias para componentes de autenticación (02/04/2025) 
-- [ ] Implementar pruebas unitarias para otros componentes
+- [x] Implementar pruebas unitarias para componentes de chat (08/04/2025)
 - [ ] Implementar pruebas de integración
 - [ ] Realizar pruebas de usabilidad
 - [ ] Realizar pruebas de rendimiento
@@ -66,8 +66,13 @@
 - [x] Crear TASK.md (01/04/2025)
 
 ## 🔎 Tareas Descubiertas Durante el Trabajo
+- [x] Corregir error "useSearchParams() should be wrapped in a suspense boundary" en las páginas de chat (general y dinámica) (08/04/2025)
+- [x] Agregar opción de redimensionar la barra lateral (08/04/2025)
+- [x] Corregir la funcionalidad de redimensionar la barra lateral (08/04/2025)
 - [x] Corregir error al seleccionar chat en la barra lateral y agregar la página dinámica [id] (07/04/2025)
 - [x] Agregar función generateStaticParams a la página dinámica de chat para compatibilidad con exportación estática (07/04/2025)
+- [x] Corregir error de página "/chat/[id]/page" que falta la función exportada "generateStaticParams()" requerida con config "output: export" (08/04/2025)
+- [x] Desactivar configuración "output: export" en next.config.js para permitir el uso de middleware con autenticación (08/04/2025)
 - [x] Estandarizar las rutas a inglés (/historial -> /history, /perfil -> /profile) (02/04/2025)
 - [x] Cambiar la redirección por defecto de /historial a /chat (02/04/2025)
 - [x] Reordenar navegación: poner "Chat" primero y después "Mis Conversaciones" (02/04/2025)
@@ -93,5 +98,5 @@
 - [x] Crear ruta dinámica para visualizar y continuar conversaciones existentes (02/04/2025)
 - [x] Renombrar tablas de conversations a chat_sessions y messages a chat_messages (02/04/2025)
 - [x] Configurar Netlify para despliegue automatizado (07/04/2025)
-- [ ] Implementar servicios de traducción para i18n
-- [ ] Mejorar la navegación y diseño para móviles
+- [x] Consolidar rutas de chat: usar parámetros de consulta en lugar de rutas dinámicas (08/04/2025)
+- [x] Corregir configuración de ESLint ("next/core-web-api" a "next/core-web-vitals") (08/04/2025)

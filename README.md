@@ -101,11 +101,24 @@ La estructura detallada del proyecto se encuentra en el archivo `PLANNING.md`.
 5. La conversación se almacena en Supabase
 
 ## 🧪 Testing
+El proyecto incluye pruebas unitarias para asegurar la calidad y evitar regresiones:
+
 ```bash
+# Ejecutar todas las pruebas
 npm run test
 # o
 yarn test
+
+# Ejecutar pruebas con modo watch
+npm run test:watch
+# o
+yarn test:watch
 ```
+
+Las pruebas están organizadas siguiendo la estructura del proyecto:
+- `tests/components/`: Pruebas para componentes de UI
+- `tests/lib/`: Pruebas para utilidades y servicios
+- `tests/app/`: Pruebas para páginas y rutas
 
 ## 📝 Documentación Adicional
 Para más información sobre la arquitectura y el plan de desarrollo, consulta el archivo `PLANNING.md`.
@@ -117,10 +130,13 @@ Para más información sobre la arquitectura y el plan de desarrollo, consulta e
 - Internacionalización (i18n)
 
 ## 🛠️ Actualizaciones Recientes
-- (07/04/2025) Corregido error de compatibilidad al agregar función generateStaticParams en la página dinámica de chat para exportación estática.
-- (07/04/2025) Implementada la integración con n8n a través de webhooks para el procesamiento de mensajes de chat con IA.
-- (07/04/2025) Corregido el error al seleccionar un chat de la barra lateral. Implementada una página dinámica para visualización de conversaciones por ID.
-- (07/04/2025) Añadido soporte para títulos de chat vacíos, mostrando "Cargando título..." cuando el título no está disponible.
+- (08/04/2025) Refactorizado el sistema de rutas: consolidadas las rutas de chat usando parámetros de consulta para mejor mantenibilidad
+- (08/04/2025) Corregida configuración de ESLint: cambiado "next/core-web-api" a "next/core-web-vitals"
+- (08/04/2025) Agregada la funcionalidad de barra lateral redimensionable, permitiendo a los usuarios ajustar el ancho según sus preferencias
+- (07/04/2025) Corregido error de compatibilidad al agregar función generateStaticParams en la página dinámica de chat para exportación estática
+- (07/04/2025) Implementada la integración con n8n a través de webhooks para el procesamiento de mensajes de chat con IA
+- (07/04/2025) Corregido el error al seleccionar un chat de la barra lateral. Implementada una página dinámica para visualización de conversaciones por ID
+- (07/04/2025) Añadido soporte para títulos de chat vacíos, mostrando "Cargando título..." cuando el título no está disponible
 
 ## 👥 Contribuir
 Las contribuciones son bienvenidas. Por favor, lee las guías de contribución antes de enviar pull requests.

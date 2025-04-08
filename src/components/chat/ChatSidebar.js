@@ -2,10 +2,11 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { getUserConversations } from '@/lib/supabase/conversations';
 import { useAuth } from '@/context/auth';
 import { Button } from '@/components/ui/button';
+import { ResizablePanel } from '@/components/ui/resizable';
 
 /**
  * Sidebar component for chat page that displays all user conversations
@@ -18,6 +19,8 @@ export default function ChatSidebar() {
   const [error, setError] = useState(null);
   const { user } = useAuth();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const router = useRouter();
   
   useEffect(() => {
     const loadConversations = async () => {
@@ -66,21 +69,36 @@ export default function ChatSidebar() {
         supabase.removeChannel(conversationsSubscription);
       };
     }
-  }, [user, pathname]);
+  }, [user, pathname, searchParams]);
   
   // Helper to determine if conversation is active
-  const isActive = (id) => pathname === `/chat/${id}`;
+  const isActive = (id) => {
+    const currentId = searchParams.get('id');
+    return currentId === id;
+  };
+  
+  /**
+   * Handles creating a new conversation by navigating to the chat page with a new parameter
+   */
+  const handleNewConversation = () => {
+    // Use router.push with a query parameter to force a new chat context
+    router.push('/chat?new=true');
+  };
   
   return (
-    <aside className="w-64 border-r border-legal-200 dark:border-legal-700 min-h-[calc(100vh-4rem)] bg-white dark:bg-slate-900 overflow-y-auto">
+    <ResizablePanel
+      defaultSize={256} // Default width of 256px (equivalent to w-64)
+      minSize={180}     // Minimum width
+      maxSize={450}     // Maximum width
+      className="border-r border-legal-200 dark:border-legal-700 min-h-[calc(100vh-4rem)] bg-white dark:bg-slate-900 overflow-y-auto"
+    >
       <div className="p-4">
-        <Link href="/chat">
-          <Button 
-            className="w-full bg-legal-600 hover:bg-legal-500 dark:bg-legal-400 dark:hover:bg-legal-300 dark:text-slate-900"
-          >
-            Nueva Conversación
-          </Button>
-        </Link>
+        <Button 
+          onClick={handleNewConversation}
+          className="w-full bg-legal-600 hover:bg-legal-500 dark:bg-legal-400 dark:hover:bg-legal-300 dark:text-slate-900"
+        >
+          Nueva Conversación
+        </Button>
       </div>
       
       <div className="px-3 py-2">
@@ -109,21 +127,21 @@ export default function ChatSidebar() {
             {conversations.map(conversation => (
               <li key={conversation.id}>
                 <Link 
-                  href={`/chat/${conversation.id}`}
+                  href={`/chat?id=${conversation.id}`}
                   className={`block px-3 py-2 text-sm rounded-md truncate ${
                     isActive(conversation.id)
                       ? 'bg-legal-100 text-legal-900 dark:bg-legal-800 dark:text-white font-medium'
                       : 'text-legal-700 hover:bg-legal-50 dark:text-legal-300 dark:hover:bg-legal-800/50'
                   }`}
-                  title={conversation.title || "Loading title..."}
+                  title={conversation.session_title || "Loading title..."}
                 >
-                  {conversation.title || "Loading title..."}
+                  {conversation.session_title || "Loading title..."}
                 </Link>
               </li>
             ))}
           </ul>
         )}
       </div>
-    </aside>
+    </ResizablePanel>
   );
 }

@@ -47,7 +47,7 @@ function formatDateRelative(date) {
  */
 export default function ConversationItem({ conversation, onDelete }) {
   const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState(conversation.title);
+  const [title, setTitle] = useState(conversation.session_title);
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState("");
   const [isConfirmOpen, setIsConfirmOpen] = useState(false);
@@ -76,7 +76,7 @@ export default function ConversationItem({ conversation, onDelete }) {
   };
   
   const handleCancel = () => {
-    setTitle(conversation.title);
+    setTitle(conversation.session_title);
     setIsEditing(false);
     setError("");
   };
@@ -136,7 +136,7 @@ export default function ConversationItem({ conversation, onDelete }) {
               href={`/chat/${conversation.id}`} 
               className="font-medium text-legal-800 dark:text-legal-200 hover:text-legal-600 dark:hover:text-legal-300"
             >
-              {conversation.title}
+              {conversation.session_title}
             </Link>
           )}
           <p className="text-xs text-legal-500 mt-1">{formattedDate}</p>

@@ -56,7 +56,7 @@ export async function getConversationWithMessages(sessionId) {
  * Crea una nueva conversación
  *
  * @param {string} userId - ID del usuario
- * @param {string} title - Título de la conversación
+ * @param {string} session_title - Título de la sesión de chat
  * @returns {Promise} Conversación creada y posible error
  */
 export async function createConversation(userId) {
@@ -73,13 +73,13 @@ export async function createConversation(userId) {
  * Actualiza el título de una conversación
  *
  * @param {string} sessionId - ID de la sesión de chat
- * @param {string} title - Nuevo título
+ * @param {string} session_title - Nuevo título
  * @returns {Promise} Resultado de la operación
  */
-export async function updateConversationTitle(sessionId, title) {
+export async function updateConversationTitle(sessionId, session_title) {
   const { data, error } = await supabase
     .from('chat_sessions')
-    .update({ title, updated_at: new Date() })
+    .update({ session_title, updated_at: new Date() })
     .eq('id', sessionId)
     .select()
     .single();

@@ -6,7 +6,8 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
-  output: 'export',
+  // Removing 'output: export' to enable middleware
+  // output: 'export',
   distDir: 'out',
   // Enable file-system routing
   useFileSystemPublicRoutes: true,
