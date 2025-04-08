@@ -8,6 +8,8 @@ const nextConfig = {
   trailingSlash: true,
   output: 'export',
   distDir: 'out',
+  // Enable file-system routing
+  useFileSystemPublicRoutes: true,
 }
 
 module.exports = nextConfig

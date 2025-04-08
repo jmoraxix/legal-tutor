@@ -52,7 +52,7 @@ Crea un archivo `.env.local` en la raíz del proyecto basándote en `.env.exampl
 ```
 NEXT_PUBLIC_SUPABASE_URL=tu_url_de_supabase
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_clave_anon_de_supabase
-NEXT_PUBLIC_N8N_WEBHOOK_URL=tu_url_de_webhook_n8n
+NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL=tu_url_de_webhook_n8n
 ```
 
 ### Iniciar el Servidor de Desarrollo
@@ -115,6 +115,12 @@ Para más información sobre la arquitectura y el plan de desarrollo, consulta e
 - Modos de aprendizaje avanzados
 - Análisis de casos específicos
 - Internacionalización (i18n)
+
+## 🛠️ Actualizaciones Recientes
+- (07/04/2025) Corregido error de compatibilidad al agregar función generateStaticParams en la página dinámica de chat para exportación estática.
+- (07/04/2025) Implementada la integración con n8n a través de webhooks para el procesamiento de mensajes de chat con IA.
+- (07/04/2025) Corregido el error al seleccionar un chat de la barra lateral. Implementada una página dinámica para visualización de conversaciones por ID.
+- (07/04/2025) Añadido soporte para títulos de chat vacíos, mostrando "Cargando título..." cuando el título no está disponible.
 
 ## 👥 Contribuir
 Las contribuciones son bienvenidas. Por favor, lee las guías de contribución antes de enviar pull requests.

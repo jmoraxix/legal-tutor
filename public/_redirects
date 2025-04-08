@@ -1,1 +1,12 @@
-/*    /index.html   200
+# Netlify redirects file
+
+# Special redirects for chat routes that exist
+/chat/placeholder-id  /chat/placeholder-id.html  200
+/chat/new            /chat/new.html              200
+/chat/latest         /chat/latest.html           200
+
+# Fallback for any other chat IDs
+/chat/*  /index.html  200
+
+# Handle all other client-side routing
+/*  /index.html  200

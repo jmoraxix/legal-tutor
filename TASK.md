@@ -19,7 +19,7 @@
 ### Chat General
 - [x] Diseñar interfaz de chat (01/04/2025)
 - [x] Implementar envío de mensajes (básico) (01/04/2025)
-- [ ] Configurar conexión con n8n (webhook)
+- [x] Configurar conexión con n8n (webhook) (07/04/2025)
 - [x] Implementar visualización de respuestas (básico) (01/04/2025)
 - [x] Guardar historial de conversaciones en Supabase (01/04/2025)
 - [x] Implementar barra lateral con historial de chats (02/04/2025)
@@ -66,6 +66,8 @@
 - [x] Crear TASK.md (01/04/2025)
 
 ## 🔎 Tareas Descubiertas Durante el Trabajo
+- [x] Corregir error al seleccionar chat en la barra lateral y agregar la página dinámica [id] (07/04/2025)
+- [x] Agregar función generateStaticParams a la página dinámica de chat para compatibilidad con exportación estática (07/04/2025)
 - [x] Estandarizar las rutas a inglés (/historial -> /history, /perfil -> /profile) (02/04/2025)
 - [x] Cambiar la redirección por defecto de /historial a /chat (02/04/2025)
 - [x] Reordenar navegación: poner "Chat" primero y después "Mis Conversaciones" (02/04/2025)
