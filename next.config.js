@@ -6,8 +6,8 @@ const nextConfig = {
     unoptimized: true,
   },
   trailingSlash: true,
-  // Removing 'output: export' to enable middleware
-  // output: 'export',
+  // Enable output: 'export' for static site generation
+  output: 'export',
   distDir: 'out',
   // Enable file-system routing
   useFileSystemPublicRoutes: true,
