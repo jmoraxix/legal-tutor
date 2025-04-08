@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/auth";
-import { Button } from "@/components/ui/button";
+import { _Button } from "@/components/ui/button";
 
 /**
  * Componente de botón de usuario para navegar a login/registro o mostrar menú de usuario

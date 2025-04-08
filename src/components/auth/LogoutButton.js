@@ -12,7 +12,7 @@ import { LogOut } from "lucide-react";
  */
 export default function LogoutButton() {
   const { logout, isAuthenticated } = useAuth();
-  const router = useRouter();
+  const _router = useRouter();
 
   /**
    * Maneja el proceso de cierre de sesión

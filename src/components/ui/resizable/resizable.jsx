@@ -5,7 +5,7 @@ import { useState, useEffect, useRef } from "react";
 
 /**
  * ResizablePanel component for adjustable width panels
- * 
+ *
  * @param {Object} props - Component props
  * @param {React.ReactNode} props.children - Panel content
  * @param {string} props.className - Additional CSS classes
@@ -26,7 +26,7 @@ export function ResizablePanel({
   const [size, setSize] = useState(defaultSize);
   const [isResizing, setIsResizing] = useState(false);
   const isResizingRef = useRef(false);
-  
+
   // Get initial size from localStorage or use default
   useEffect(() => {
     try {
@@ -40,7 +40,7 @@ export function ResizablePanel({
       console.error("Error reading from localStorage:", error);
     }
   }, [minSize, maxSize]);
-  
+
   // Save size to localStorage when it changes
   useEffect(() => {
     if (size !== defaultSize) {
@@ -51,53 +51,53 @@ export function ResizablePanel({
       }
     }
   }, [size, defaultSize]);
-  
+
   // Handle mouse movement during resize
   const handleMouseMove = (e) => {
     if (!isResizingRef.current) return;
-    
+
     // Calculate new size based on mouse position
     let newSize = e.clientX;
-    
+
     // Enforce min and max constraints
     newSize = Math.max(minSize, Math.min(maxSize, newSize));
-    
+
     setSize(newSize);
   };
-  
+
   // End resizing
   const handleMouseUp = () => {
     setIsResizing(false);
     isResizingRef.current = false;
-    
+
     // Remove event listeners
     document.removeEventListener("mousemove", handleMouseMove);
     document.removeEventListener("mouseup", handleMouseUp);
-    
+
     // Reset cursor and user-select
     document.body.style.cursor = "";
     document.body.style.userSelect = "";
-    
+
     if (onResize) {
       onResize(size);
     }
   };
-  
+
   // Start resizing
   const handleResizeStart = (e) => {
     e.preventDefault();
     setIsResizing(true);
     isResizingRef.current = true;
-    
+
     // Add event listeners for resize
     document.addEventListener("mousemove", handleMouseMove);
     document.addEventListener("mouseup", handleMouseUp);
-    
+
     // Change cursor and prevent text selection
     document.body.style.cursor = "ew-resize";
     document.body.style.userSelect = "none";
   };
-  
+
   // Cleanup event listeners when component unmounts
   useEffect(() => {
     return () => {
@@ -107,14 +107,14 @@ export function ResizablePanel({
       document.body.style.userSelect = "";
     };
   }, []);
-  
+
   return (
     <div
       className={`relative ${className}`}
       style={{ width: `${size}px` }}
     >
       {children}
-      
+
       {/* Resize handle */}
       <div
         className="absolute top-0 right-0 h-full w-4 cursor-ew-resize group z-10"
