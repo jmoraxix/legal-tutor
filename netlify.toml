@@ -1,5 +1,5 @@
 [build]
-  command = "npm cache clean --force && npm install && npm run build"
+  command = "npm cache clean --force && rm -rf node_modules package-lock.json && npm install --legacy-peer-deps && npm run build"
   publish = "out"
 
 [build.environment]
