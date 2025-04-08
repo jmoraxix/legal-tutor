@@ -91,7 +91,44 @@ module.exports = {
         'legal': '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
         'legal-lg': '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)',
       },
+      typography: {
+        DEFAULT: {
+          css: {
+            maxWidth: '100%',
+            color: 'inherit',
+            a: {
+              color: 'inherit',
+              textDecoration: 'underline',
+              fontWeight: '500',
+            },
+            strong: {
+              fontWeight: '600',
+            },
+            code: {
+              background: 'rgba(0, 0, 0, 0.05)',
+              borderRadius: '0.25rem',
+              padding: '0.25rem',
+              fontSize: '0.875em',
+            },
+            'code::before': {
+              content: '""',
+            },
+            'code::after': {
+              content: '""',
+            },
+            pre: {
+              background: 'rgba(0, 0, 0, 0.05)',
+              borderRadius: '0.25rem',
+              padding: '0.75rem 1rem',
+              fontSize: '0.875em',
+            },
+          },
+        },
+      },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require('@tailwindcss/typography'),
+  ],
 }

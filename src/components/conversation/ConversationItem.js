@@ -6,6 +6,7 @@ import Link from "next/link";
 // import { formatDistanceToNow } from "date-fns";
 // import { es } from "date-fns/locale";
 import { deleteConversation, updateConversationTitle } from "@/lib/supabase/conversations";
+import DeleteConfirmationDialog from "./DeleteConfirmationDialog";
 
 /**
  * Formatea una fecha en formato relativo simple
@@ -49,6 +50,7 @@ export default function ConversationItem({ conversation, onDelete }) {
   const [title, setTitle] = useState(conversation.title);
   const [isDeleting, setIsDeleting] = useState(false);
   const [error, setError] = useState("");
+  const [isConfirmOpen, setIsConfirmOpen] = useState(false);
   
   // Usar la función temporal en lugar de date-fns
   const formattedDate = conversation.updated_at
@@ -79,7 +81,11 @@ export default function ConversationItem({ conversation, onDelete }) {
     setError("");
   };
   
-  const handleDelete = async () => {
+  const handleDeleteClick = () => {
+    setIsConfirmOpen(true);
+  };
+  
+  const handleDeleteConfirm = async () => {
     try {
       setIsDeleting(true);
       setError("");
@@ -148,7 +154,7 @@ export default function ConversationItem({ conversation, onDelete }) {
               </svg>
             </button>
             <button
-              onClick={handleDelete}
+              onClick={handleDeleteClick}
               disabled={isDeleting}
               className="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300"
               title="Eliminar"
@@ -164,6 +170,14 @@ export default function ConversationItem({ conversation, onDelete }) {
       {error && (
         <p className="text-xs text-red-600 dark:text-red-400 mt-2">{error}</p>
       )}
+
+      <DeleteConfirmationDialog
+        open={isConfirmOpen}
+        onOpenChange={setIsConfirmOpen}
+        onConfirm={handleDeleteConfirm}
+        title="¿Eliminar conversación?"
+        description="Esta acción no se puede deshacer. La conversación será eliminada permanentemente."
+      />
     </div>
   );
 }
