@@ -25,10 +25,6 @@ const lora = Lora({
 export default function RootLayout({ children }) {
   return (
     <html lang="es" suppressHydrationWarning className={`${inter.variable} ${lora.variable}`}>
-      <head>
-        <title>Legal Tutor - Aprende sobre temas legales en Costa Rica</title>
-        <meta name="description" content="Chatbot para consultas y aprendizaje de temas legales en Costa Rica" />
-      </head>
       <body className={inter.className}>
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
@@ -41,6 +37,6 @@ export default function RootLayout({ children }) {
 }
 
 export const metadata = {
-  title: 'Legal Tutor',
+  title: 'Legal Tutor - Aprende sobre temas legales en Costa Rica',
   description: 'Chatbot para consultas y aprendizaje de temas legales en Costa Rica',
 };
