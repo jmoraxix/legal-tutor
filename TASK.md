@@ -33,6 +33,8 @@
 - [ ] Guardar progreso de usuario en Supabase
 
 ### n8n
+- [x] Implementar autenticación JWT para webhook (10/04/2025)
+- [x] Implementar soluciones para errores CORS con JWT (10/04/2025)
 - [ ] Configurar workflow para procesamiento de mensajes
 - [ ] Implementar integración con IA (Claude o similar)
 - [ ] Configurar acceso a documentos legales

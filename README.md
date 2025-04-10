@@ -55,6 +55,12 @@ Crea un archivo `.env.local` en la raíz del proyecto basándote en `.env.exampl
 NEXT_PUBLIC_SUPABASE_URL=tu_url_de_supabase
 NEXT_PUBLIC_SUPABASE_ANON_KEY=tu_clave_anon_de_supabase
 NEXT_PUBLIC_N8N_CHAT_WEBHOOK_URL=tu_url_de_webhook_n8n
+NEXT_PUBLIC_JWT_SECRET=tu_clave_secreta_jwt_min_32_caracteres
+```
+
+**Nota sobre JWT_SECRET**: Debes generar una clave segura de al menos 32 caracteres para la firma de tokens JWT usados en la autenticación de webhooks. Puedes generar una clave segura con el siguiente comando:
+```bash
+node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
 ```
 
 ### Iniciar el Servidor de Desarrollo
@@ -97,10 +103,12 @@ La estructura detallada del proyecto se encuentra en el archivo `PLANNING.md`.
 
 ## 🔄 Flujo de Datos
 1. El usuario envía una consulta a través del chat
-2. La aplicación envía la consulta a n8n mediante un webhook
-3. n8n procesa la consulta utilizando IA y documentos legales
-4. La respuesta se devuelve al frontend y se muestra al usuario
-5. La conversación se almacena en Supabase
+2. La aplicación genera un token JWT firmado con la clave secreta
+3. La consulta se envía a n8n mediante un webhook con el token JWT en el header de autorización
+4. n8n verifica el token JWT antes de procesar la solicitud
+5. Si el token es válido, n8n procesa la consulta utilizando IA y documentos legales
+6. La respuesta se devuelve al frontend y se muestra al usuario
+7. La conversación se almacena en Supabase
 
 ## 🧪 Testing
 El proyecto incluye pruebas unitarias para asegurar la calidad y evitar regresiones:
@@ -132,6 +140,8 @@ Para más información sobre la arquitectura y el plan de desarrollo, consulta e
 - Internacionalización (i18n)
 
 ## 🛠️ Actualizaciones Recientes
+- (10/04/2025) Implementadas varias soluciones para el error CORS con JWT, incluyendo un endpoint de API proxy, verificación de JWT en parámetros de consulta, y configuración CORS para N8N
+- (10/04/2025) Implementada autenticación JWT para los webhooks de chat, añadiendo una capa de seguridad para la comunicación con n8n
 - (10/04/2025) Mejorado el sistema de feedback con un botón flotante siempre visible y efectos de animación
 - (10/04/2025) Implementado sistema de feedback que permite a los usuarios enviar comentarios, sugerencias o reportar errores desde cualquier página de la aplicación
 - (10/04/2025) Configurado el despliegue automático en Netlify

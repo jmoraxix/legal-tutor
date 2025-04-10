@@ -150,7 +150,7 @@ function ChatContent() {
           );
 
           // Send message to N8N webhook
-          const response = await sendMessageToN8N(input, currentSessionId);
+          const response = await sendMessageToN8N(input, currentSessionId, user?.id);
 
           // Create AI response message
           const botMessage = {
@@ -190,7 +190,7 @@ function ChatContent() {
         setInput("");
 
         // Send message to N8N webhook
-        const response = await sendMessageToN8N(input, currentSessionId);
+        const response = await sendMessageToN8N(input, currentSessionId, user?.id);
 
         // Create AI response message
         const botMessage = {
@@ -207,7 +207,7 @@ function ChatContent() {
         setInput("");
 
         // Send message to N8N webhook without a session ID
-        const response = await sendMessageToN8N(input, null);
+        const response = await sendMessageToN8N(input, null, null);
 
         // Create AI response message
         const botMessage = {

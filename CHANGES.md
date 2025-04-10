@@ -1,6 +1,44 @@
 # Cambios Realizados (10/04/2025)
 
-## 📡 Mejoras al Sistema de Feedback
+## 🔧 Soluciones para errores CORS con JWT
+
+### 1. Endpoint API Proxy
+- Implementado endpoint API `/api/chat` para evitar problemas CORS entre el cliente y N8N
+- El endpoint maneja la autenticación JWT en el lado del servidor
+- Se agrega la configuración de variables de entorno tanto para cliente como servidor
+
+### 2. Alternativas de implementación
+- Creada versión alternativa del servicio de chat que usa parámetros de consulta en lugar de headers
+- Implementada documentación detallada para configurar CORS en N8N
+- Creados archivos de configuración y código de ejemplo para N8N
+
+### 3. Documentación
+- Creado archivo de documentación `FIX_CORS_JWT.md` con todas las soluciones posibles
+- Incluidas instrucciones detalladas para N8N en `N8N_CORS_CONFIG.md`
+- Actualizado README con información sobre las soluciones implementadas
+
+## 🔒 Implementación de Autenticación JWT para Webhooks
+
+### 1. Creación de Utilidades JWT
+- Implementada utilidad para generar tokens JWT firmados (`jwt.js`)
+- Creada utilidad de referencia para la verificación de tokens en N8N (`jwt-verify.js`)
+- Añadido código de ejemplo para un nodo de función en N8N para verificación (`jwt-verification-code.js`)
+
+### 2. Actualización del Servicio de Chat
+- Modificado `chat-service.js` para incluir tokens JWT en las solicitudes a N8N
+- Agregado soporte para incluir información de usuario y sesión en los tokens
+- Implementada generación de nonce aleatorio para prevenir ataques de repetición
+
+### 3. Configuración
+- Añadida nueva variable de entorno `NEXT_PUBLIC_JWT_SECRET` para la firma de tokens
+- Actualizada la documentación con instrucciones para generar una clave secreta segura
+
+### 4. Pruebas
+- Creadas pruebas unitarias para las utilidades JWT
+- Implementados mocks para las dependencias externas
+- Cobertura de casos de éxito, casos de error y validación de estructura de token
+
+## 📱 Mejoras al Sistema de Feedback
 
 ### 1. Botón de Feedback Flotante
 - Implementado botón de feedback flotante que permanece visible en todas las páginas
