@@ -12,7 +12,7 @@ import {
 } from '@/lib/auth';
 
 // Creamos el contexto de autenticación
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
 /**
  * Proveedor de contexto de autenticación

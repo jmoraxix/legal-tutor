@@ -9,7 +9,7 @@ import Link from 'next/link';
  */
 export default function Footer() {
   return (
-    <footer className="border-t py-4 bg-white dark:bg-slate-900 shadow-md">
+    <footer className="border-t py-4 bg-white dark:bg-slate-900 shadow-md relative">
       <div className="container mx-auto text-center text-sm text-legal-500">
         <p>&copy; {new Date().getFullYear()} Ayzek Studio. Todos los derechos reservados.</p>
         <div className="flex justify-center gap-6 mt-2">

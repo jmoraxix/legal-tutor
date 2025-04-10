@@ -1,3 +1,50 @@
+# Cambios Realizados (10/04/2025)
+
+## 📡 Mejoras al Sistema de Feedback
+
+### 1. Botón de Feedback Flotante
+- Implementado botón de feedback flotante que permanece visible en todas las páginas
+- Reubicado desde el footer a una posición fija en la esquina inferior derecha
+- Añadidos efectos de animación y hover para mejorar la experiencia de usuario
+- Corregidos problemas de "use client" directive en componentes que usan React hooks
+
+## 👷 Implementación de Sistema de Feedback
+
+### 1. Creación de Tabla para Feedback en Supabase
+- Nueva tabla `user_feedback` para almacenar comentarios de usuarios
+- Implementadas políticas de seguridad RLS para proteger los datos
+- Soporte para feedback de usuarios anónimos y autenticados
+
+### 2. Componentes de UI para Feedback
+- Creado botón de feedback con icono de signo de interrogación
+- Implementado diálogo modal para envío de feedback
+- Opciones para diferentes tipos de feedback (general, bug, sugerencia, pregunta)
+- Ubicado en la esquina inferior derecha del footer para acceso global
+
+### 3. Funcionalidad Backend
+- Funciones para enviar feedback a Supabase
+- Soporte para adjuntar información de contexto (página actual, ID de usuario)
+- Validación de datos antes del envío
+
+### 4. Pruebas Unitarias
+- Pruebas completas para componentes de feedback
+- Pruebas para funciones de API de Supabase
+- Cobertura de casos de éxito, casos de error y diferentes estados de UI
+
+## 🚀 Configuración de Despliegue en Netlify
+
+### 1. Configuración Inicial
+- Configurado archivo netlify.toml con opciones de despliegue
+- Ajustados parámetros de construccción para Next.js
+
+### 2. Variables de Entorno
+- Configuradas variables de entorno para el entorno de producción
+- Separados archivos .env para desarrollo y producción
+
+### 3. Documentación
+- Actualizado README.md con instrucciones detalladas para despliegue en Netlify
+- Documentado el proceso para futuros desarrolladores
+
 # Cambios Realizados (08/04/2025)
 
 ## 🔧 Correcciones de Errores de Construcción

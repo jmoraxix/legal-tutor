@@ -2,6 +2,8 @@ import { Inter, Lora } from 'next/font/google';
 import '@/styles/globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { AuthProvider } from '@/context/auth';
+import { Toaster } from '@/components/ui/toaster';
+import { FloatingFeedback } from '@/components/feedback';
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -29,6 +31,8 @@ export default function RootLayout({ children }) {
         <AuthProvider>
           <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
             {children}
+            <Toaster />
+            <FloatingFeedback />
           </ThemeProvider>
         </AuthProvider>
       </body>

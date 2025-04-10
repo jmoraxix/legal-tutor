@@ -66,6 +66,8 @@
 - [x] Crear TASK.md (01/04/2025)
 
 ## 🔎 Tareas Descubiertas Durante el Trabajo
+- [x] Mejorar el botón de feedback colocándolo como elemento flotante fijo (10/04/2025)
+- [x] Implementar función de feedback para que los usuarios puedan enviar comentarios (10/04/2025)
 - [x] Corregir error "useSearchParams() should be wrapped in a suspense boundary" en las páginas de chat (general y dinámica) (08/04/2025)
 - [x] Agregar opción de redimensionar la barra lateral (08/04/2025)
 - [x] Corregir la funcionalidad de redimensionar la barra lateral (08/04/2025)

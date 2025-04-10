@@ -17,6 +17,8 @@ La aplicación ofrece dos modalidades principales:
 - Tema claro/oscuro con cambio automático
 - Diseño responsive para uso en diferentes dispositivos
 - Desplegado en Netlify para alta disponibilidad
+- Sistema de feedback para que los usuarios envíen comentarios y sugerencias desde cualquier página
+- Botón de feedback flotante siempre visible
 
 ## 🛠️ Tecnologías Utilizadas
 - **Frontend**: React
@@ -130,6 +132,9 @@ Para más información sobre la arquitectura y el plan de desarrollo, consulta e
 - Internacionalización (i18n)
 
 ## 🛠️ Actualizaciones Recientes
+- (10/04/2025) Mejorado el sistema de feedback con un botón flotante siempre visible y efectos de animación
+- (10/04/2025) Implementado sistema de feedback que permite a los usuarios enviar comentarios, sugerencias o reportar errores desde cualquier página de la aplicación
+- (10/04/2025) Configurado el despliegue automático en Netlify
 - (08/04/2025) Refactorizado el sistema de rutas: consolidadas las rutas de chat usando parámetros de consulta para mejor mantenibilidad
 - (08/04/2025) Corregida configuración de ESLint: cambiado "next/core-web-api" a "next/core-web-vitals"
 - (08/04/2025) Agregada la funcionalidad de barra lateral redimensionable, permitiendo a los usuarios ajustar el ancho según sus preferencias
