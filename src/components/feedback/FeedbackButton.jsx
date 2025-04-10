@@ -15,13 +15,13 @@ import { Button } from '@/components/ui/button';
 const FeedbackButton = ({ onClick, className = '' }) => {
   return (
     <Button
-      variant="outline"
+      variant="ghost"
       size="icon"
-      className={`rounded-full hover:bg-primary hover:text-primary-foreground ${className}`}
+      className={`text-primary hover:text-primary focus:outline-none ${className}`}
       onClick={onClick}
       aria-label="Enviar feedback"
     >
-      <HelpCircle className="h-5 w-5" />
+      <HelpCircle className="h-6 w-6" />
     </Button>
   );
 };

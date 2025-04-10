@@ -10,8 +10,12 @@ import { Feedback } from './index';
  */
 const FloatingFeedback = () => {
   return (
-    <div className="fixed bottom-6 right-6 z-50 animate-in slide-in-from-right-8 duration-500">
-      <Feedback className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out bg-background border-2 border-primary/10 hover:scale-110" />
+    <div className="fixed bottom-6 right-6 z-50">
+      <div className="p-2 bg-background rounded-full shadow-xl border-2 border-primary/20 hover:border-primary/50 transition-all duration-300 ease-in-out">
+        <Feedback 
+          className="rounded-full w-full h-full bg-transparent border-none shadow-none hover:bg-primary/10 hover:scale-105" 
+        />
+      </div>
     </div>
   );
 };
