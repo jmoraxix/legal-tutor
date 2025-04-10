@@ -6,7 +6,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { getUserConversations } from '@/lib/supabase/conversations';
 import { useAuth } from '@/context/auth';
 import { Button } from '@/components/ui/button';
-import { ResizablePanel } from '@/components/ui/resizable';
+import { ResizablePanel } from '@/components/ui/resizable/resizable.jsx';
 
 /**
  * Sidebar component for chat page that displays all user conversations
