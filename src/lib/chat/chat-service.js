@@ -3,7 +3,7 @@
  * Includes JWT authentication for secure webhook communication
  */
 
-import { generateWebhookToken } from '@/lib/auth/jwt';
+// Server-side JWT generation now happens via API
 
 /**
  * Sends a message to the N8N webhook and processes the response
@@ -26,13 +26,21 @@ export async function sendMessageToN8N(message, sessionId = null, userId = null)
       ...(sessionId && { session_id: sessionId }),
     };
 
-    // Generate JWT token for authorization
-    const token = await generateWebhookToken({
-      sessionId,
-      userId,
-      // Add a small random component to prevent token reuse
-      nonce: Math.random().toString(36).substring(2, 15),
+    // Get JWT token from the API
+    const tokenResponse = await fetch('/api/auth/token', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId,
+        userId,
+      }),
     });
+    
+    if (!tokenResponse.ok) {
+      throw new Error(`Token generation error: ${tokenResponse.status}`);
+    }
+    
+    const { token } = await tokenResponse.json();
 
     // Including Authorization header triggers a CORS preflight request
     // We'll make sure our fetch request is properly configured

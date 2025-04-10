@@ -24,9 +24,8 @@ export async function generateWebhookToken(payload, expiresIn = 300) {
   };
 
   // Get JWT secret from environment
-  const JWT_SECRET = process.env.NEXT_PUBLIC_JWT_SECRET
   const secret = new TextEncoder().encode(
-    JWT_SECRET
+    process.env.JWT_SECRET
   );
 
   if (!secret || secret.length === 0) {

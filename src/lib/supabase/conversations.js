@@ -15,7 +15,7 @@ export async function getUserConversations(userId) {
     .eq('user_id', userId)
     .order('updated_at', { ascending: false });
 
-    console.log(data, error);
+    // console.log(data, error);
 
   return { conversations: data || [], error };
 }
