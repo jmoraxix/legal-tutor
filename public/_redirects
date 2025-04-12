@@ -1,12 +1,10 @@
-# Netlify redirects file
+# These rules will change if you change your site's custom domains or HTTPS settings
 
-# Special redirects for chat routes that exist
-/chat/placeholder-id  /chat/placeholder-id.html  200
-/chat/new            /chat/new.html              200
-/chat/latest         /chat/latest.html           200
+# Redirect default Netlify subdomain to primary domain
+https://legal-tutor.netlify.app/* https://legal-tutor.ayzkestudio.com/:splat 301!
 
-# Fallback for any other chat IDs
-/chat/*  /index.html  200
+# Handle static assets correctly
+/static/* /static/:splat 200
 
-# Handle all other client-side routing
-/*  /index.html  200
+# SPA fallback
+/* /index.html 200

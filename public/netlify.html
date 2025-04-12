@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Legal Tutor - Netlify Loader</title>
+  <script>
+    // This script ensures that CSS is loaded before content is displayed
+    window.addEventListener('DOMContentLoaded', function() {
+      // Check if stylesheets are loaded
+      const styleSheets = document.styleSheets;
+      let allStylesheetsLoaded = true;
+      
+      for (let i = 0; i < styleSheets.length; i++) {
+        try {
+          // Access rules to see if stylesheet is loaded
+          const rules = styleSheets[i].cssRules;
+          if (!rules || rules.length === 0) {
+            allStylesheetsLoaded = false;
+          }
+        } catch (e) {
+          // Security error when accessing cross-origin stylesheet
+          // This is normal and not an error
+          console.log("Note: Cross-origin stylesheet detected");
+        }
+      }
+      
+      if (!allStylesheetsLoaded) {
+        console.log("Attempting to reload stylesheets...");
+        // Force reload of stylesheets by appending timestamp
+        const links = document.querySelectorAll('link[rel="stylesheet"]');
+        links.forEach(link => {
+          const url = new URL(link.href);
+          url.searchParams.set('t', Date.now());
+          link.href = url.toString();
+        });
+      }
+    });
+  </script>
+</head>
+<body>
+  <div id="loader" style="display: flex; justify-content: center; align-items: center; height: 100vh; width: 100%;">
+    <p>Cargando Legal Tutor...</p>
+  </div>
+  
+  <script>
+    // Redirect to the actual app after a brief delay
+    setTimeout(function() {
+      window.location.href = '/';
+    }, 100);
+  </script>
+</body>
+</html>

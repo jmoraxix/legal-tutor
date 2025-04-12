@@ -7,12 +7,20 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  trailingSlash: true,
+  trailingSlash: false,
   // Enable output: 'export' for static site generation
   output: 'export',
   distDir: 'out',
   // Enable file-system routing
   useFileSystemPublicRoutes: true,
+  // Ensure CSS is properly linked
+  assetPrefix: '',
+  experimental: {
+    // Needed for Netlify compatibility
+    flexibleNextStaticDir: true
+  },
+  // Add proper public path
+  basePath: ''
 }
 
 module.exports = nextConfig
