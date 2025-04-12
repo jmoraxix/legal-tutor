@@ -14,16 +14,3 @@
 
 [[plugins]]
   package = "/netlify/plugins/css-fix-plugin"
-
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
-
-# Handle client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-  conditions = {Role = ["anonymous"]}
