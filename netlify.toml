@@ -1,5 +1,5 @@
 [build]
-  command = "npm install --legacy-peer-deps && node netlify/build.js"
+  command = "npm install && npm run build"
   publish = "out"
 
 [build.environment]
@@ -8,19 +8,3 @@
   NEXT_TELEMETRY_DISABLED = "1"
   NEXT_EXPORT = "true"
   DEBUG = "*"
-
-[[plugins]]
-  package = "@netlify/plugin-nextjs"
-
-[[redirects]]
-  from = "/*"
-  to = "/404.html"
-  status = 404
-
-# Handle client-side routing
-[[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 200
-  force = false
-  conditions = {Role = ["anonymous"]}
