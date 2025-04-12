@@ -3,6 +3,9 @@
 # Redirect default Netlify subdomain to primary domain
 https://legal-tutor.netlify.app/* https://legal-tutor.ayzkestudio.com/:splat 301!
 
+# Initial load through our custom loader to ensure proper CSS
+/ /netlify-index.html 200
+
 # Handle static assets correctly
 /static/* /static/:splat 200
 

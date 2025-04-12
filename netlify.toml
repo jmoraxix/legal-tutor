@@ -12,6 +12,9 @@
 [[plugins]]
   package = "@netlify/plugin-nextjs"
 
+[[plugins]]
+  package = "/netlify/plugins/css-fix-plugin"
+
 [[redirects]]
   from = "/*"
   to = "/404.html"

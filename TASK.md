@@ -68,6 +68,8 @@
 - [x] Crear TASK.md (01/04/2025)
 
 ## 🔎 Tareas Descubiertas Durante el Trabajo
+- [x] Resolver problema de carga de CSS en el despliegue de Netlify (11/04/2025)
+- [x] Corregir errores y warnings de ESLint durante el proceso de construcción (11/04/2025)
 - [x] Resolver error de exposición de secretos en Netlify eliminando NEXT_PUBLIC_JWT_SECRET y usando API route para generación de JWT (10/04/2025)
 - [x] Mejorar el botón de feedback colocándolo como elemento flotante fijo (10/04/2025)
 - [x] Implementar función de feedback para que los usuarios puedan enviar comentarios (10/04/2025)

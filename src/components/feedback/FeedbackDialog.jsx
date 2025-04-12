@@ -38,7 +38,7 @@ import { useUser } from '@/hooks/useUser';
 const FeedbackDialog = ({ open, setOpen }) => {
   const pathname = usePathname();
   const { toast } = useToast();
-  const { user, isLoading } = useUser();
+  const { user } = useUser();
   const [message, setMessage] = useState('');
   const [feedbackType, setFeedbackType] = useState('general');
   const [isSubmitting, setIsSubmitting] = useState(false);

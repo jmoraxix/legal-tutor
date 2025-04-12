@@ -24,8 +24,12 @@ export function ResizablePanel({
   onResize,
 }) {
   const [size, setSize] = useState(defaultSize);
-  const [isResizing, setIsResizing] = useState(false);
+  // Using ref instead of state to avoid unused variable warning
   const isResizingRef = useRef(false);
+  
+  // Functions to handle resizing as refs to avoid dependency issues
+  const handleMouseMoveRef = useRef(null);
+  const handleMouseUpRef = useRef(null);
 
   // Get initial size from localStorage or use default
   useEffect(() => {
@@ -52,46 +56,47 @@ export function ResizablePanel({
     }
   }, [size, defaultSize]);
 
-  // Handle mouse movement during resize
-  const handleMouseMove = (e) => {
-    if (!isResizingRef.current) return;
+  // Update function references when dependencies change
+  useEffect(() => {
+    // Handle mouse movement during resize
+    handleMouseMoveRef.current = (e) => {
+      if (!isResizingRef.current) return;
 
-    // Calculate new size based on mouse position
-    let newSize = e.clientX;
+      // Calculate new size based on mouse position
+      let newSize = e.clientX;
 
-    // Enforce min and max constraints
-    newSize = Math.max(minSize, Math.min(maxSize, newSize));
+      // Enforce min and max constraints
+      newSize = Math.max(minSize, Math.min(maxSize, newSize));
 
-    setSize(newSize);
-  };
+      setSize(newSize);
+    };
 
-  // End resizing
-  const handleMouseUp = () => {
-    setIsResizing(false);
-    isResizingRef.current = false;
+    // End resizing
+    handleMouseUpRef.current = () => {
+      isResizingRef.current = false;
 
-    // Remove event listeners
-    document.removeEventListener("mousemove", handleMouseMove);
-    document.removeEventListener("mouseup", handleMouseUp);
+      // Remove event listeners
+      document.removeEventListener("mousemove", handleMouseMoveRef.current);
+      document.removeEventListener("mouseup", handleMouseUpRef.current);
 
-    // Reset cursor and user-select
-    document.body.style.cursor = "";
-    document.body.style.userSelect = "";
+      // Reset cursor and user-select
+      document.body.style.cursor = "";
+      document.body.style.userSelect = "";
 
-    if (onResize) {
-      onResize(size);
-    }
-  };
+      if (onResize) {
+        onResize(size);
+      }
+    };
+  }, [minSize, maxSize, onResize, size]);
 
   // Start resizing
   const handleResizeStart = (e) => {
     e.preventDefault();
-    setIsResizing(true);
     isResizingRef.current = true;
 
     // Add event listeners for resize
-    document.addEventListener("mousemove", handleMouseMove);
-    document.addEventListener("mouseup", handleMouseUp);
+    document.addEventListener("mousemove", handleMouseMoveRef.current);
+    document.addEventListener("mouseup", handleMouseUpRef.current);
 
     // Change cursor and prevent text selection
     document.body.style.cursor = "ew-resize";
@@ -101,8 +106,12 @@ export function ResizablePanel({
   // Cleanup event listeners when component unmounts
   useEffect(() => {
     return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-      document.removeEventListener("mouseup", handleMouseUp);
+      if (handleMouseMoveRef.current) {
+        document.removeEventListener("mousemove", handleMouseMoveRef.current);
+      }
+      if (handleMouseUpRef.current) {
+        document.removeEventListener("mouseup", handleMouseUpRef.current);
+      }
       document.body.style.cursor = "";
       document.body.style.userSelect = "";
     };

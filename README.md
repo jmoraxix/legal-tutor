@@ -140,6 +140,8 @@ Para más información sobre la arquitectura y el plan de desarrollo, consulta e
 - Internacionalización (i18n)
 
 ## 🛠️ Actualizaciones Recientes
+- (11/04/2025) Corregidos errores y warnings de ESLint para garantizar una construcción limpia del proyecto
+- (11/04/2025) Corregido problema de carga de CSS en el despliegue de Netlify mediante la implementación de fallbacks, críticas CSS y scripts de precarga
 - (10/04/2025) Implementadas varias soluciones para el error CORS con JWT, incluyendo un endpoint de API proxy, verificación de JWT en parámetros de consulta, y configuración CORS para N8N
 - (10/04/2025) Implementada autenticación JWT para los webhooks de chat, añadiendo una capa de seguridad para la comunicación con n8n
 - (10/04/2025) Mejorado el sistema de feedback con un botón flotante siempre visible y efectos de animación

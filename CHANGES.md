@@ -1,3 +1,39 @@
+# Cambios Realizados (11/04/2025)
+
+## 🎨 Corrección de Carga de CSS en Netlify
+
+### 1. Diagnóstico del Problema
+- Identificados problemas de carga de estilos CSS en el despliegue de Netlify
+- Análisis de referencias a archivos CSS y configuración de rutas en Next.js
+- Identificadas inconsistencias entre el entorno de desarrollo y producción
+
+### 2. Implementación de CSS Crítico y Fallbacks
+- Creado script para generar CSS crítico que se carga inmediatamente (`scripts/generate-inline-css.js`)
+- Añadido CSS fallback en `public/netlify-fixes.css` y `public/netlify-tailwind-reset.css`
+- Implementado CSS inline en el layout principal para estilos básicos sin esperar a la carga de archivos externos
+
+### 3. Mejoras en la Carga de CSS
+- Creados scripts de precarga (`css-preload.js` y `netlify-css-loader.js`) que verifican y corrigen problemas de carga
+- Implementado sistema de monitoreo que detecta fallos en la carga de CSS y aplica soluciones automáticas
+- Añadida página intermedia (`netlify-index.html`) que asegura la correcta carga de estilos
+
+### 4. Configuración de Netlify
+- Modificado `netlify.toml` para mejorar el manejo de rutas y archivos estáticos
+- Actualizado `next.config.js` para optimizar la exportación estática y manejo de estilos
+- Creado plugin personalizado (`netlify/plugins/css-fix-plugin`) para optimización de CSS post-build
+
+### 5. Documentación
+- Actualizado README.md con información sobre las soluciones implementadas
+- Actualizado TASK.md para registrar la tarea completada
+- Documentados los cambios en CHANGES.md para referencia futura
+
+### 6. Correcciones para la Construcción
+- Eliminado el uso de `optimizeCss` experimental debido a problemas con dependencias
+- Reemplazados scripts y estilos directos con componentes nativos de Next.js
+- Corregidos warnings de ESLint relacionados con variables no utilizadas
+- Refactorizado el componente resizable para evitar problemas con la detección de cambios
+- Optimizado el hook useToast para eliminar advertencias de compilación
+
 # Cambios Realizados (10/04/2025)
 
 ## 🔧 Soluciones para errores CORS con JWT
@@ -120,11 +156,3 @@
 - Actualizado README.md con información sobre las correcciones y mejoras
 - Actualizado TASK.md para marcar las tareas completadas
 - Creado este archivo CHANGES.md para documentar los cambios realizados
-
-## 🚀 Próximos Pasos Recomendados
-
-1. Ejecutar la construcción completa del proyecto para verificar que todos los errores están resueltos
-2. Realizar pruebas manuales de las funcionalidades de chat para asegurar que todo sigue funcionando correctamente
-3. Asegurarse de que las pruebas unitarias pasen correctamente
-4. Eliminar completamente el directorio de rutas dinámicas (/src/app/chat/[id]) una vez probado el nuevo enfoque
-5. Actualizar otras referencias a las rutas de chat para usar el nuevo formato con parámetros de consulta

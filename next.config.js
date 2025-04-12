@@ -15,12 +15,10 @@ const nextConfig = {
   useFileSystemPublicRoutes: true,
   // Ensure CSS is properly linked
   assetPrefix: '',
-  experimental: {
-    // Needed for Netlify compatibility
-    flexibleNextStaticDir: true
-  },
   // Add proper public path
-  basePath: ''
+  basePath: '',
+  // Generate static CSS for better loading
+  optimizeFonts: true
 }
 
 module.exports = nextConfig
