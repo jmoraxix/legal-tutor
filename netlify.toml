@@ -2,7 +2,7 @@
   command = "npm install && npm run build"
   publish = "out"
 
-[build.environment]
+[build.production]
   NODE_VERSION = "18"
   NPM_FLAGS = "--legacy-peer-deps"
   NEXT_TELEMETRY_DISABLED = "1"
